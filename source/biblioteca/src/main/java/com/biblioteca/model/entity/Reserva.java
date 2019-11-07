@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,7 +28,7 @@ public class Reserva implements Serializable{
 	@Id
 	@GeneratedValue
 	private Long id;
-	@ManyToOne(targetEntity = Usuario.class, fetch = FetchType.LAZY, optional=false)
+	@OneToOne(targetEntity = Usuario.class, fetch = FetchType.LAZY, optional=true)
 	private Usuario leitor;
 	private Exemplar exemplar;
 	private LocalTime dataReserva;
