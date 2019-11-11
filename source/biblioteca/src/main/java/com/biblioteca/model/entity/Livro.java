@@ -1,9 +1,16 @@
 package com.biblioteca.model.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,17 +25,32 @@ import lombok.ToString;
 @AllArgsConstructor
 @Entity
 
-public class Livro implements Serializable{
+public class Livro implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
+
+	@NotBlank
 	private String titulo;
+
+	@NotBlank
 	private String editora;
+
+	@NotBlank
 	private String autor;
+
+	@NotBlank
+	@Column(nullable = false, length = 4)
 	private String edicao;
+
+	@Column(nullable = true, length = 13, unique = true)
 	private String isbn;
+
 	private Integer quantidade;
+
+	@OneToMany(targetEntity = Exemplar.class, fetch = FetchType.LAZY)
+	private List<Exemplar> exemplares = new ArrayList<Exemplar>();
 
 }

@@ -18,13 +18,15 @@ import lombok.ToString;
 @AllArgsConstructor
 @Entity
 
-public class Exemplar implements Serializable{
+public class Exemplar implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
+
 	private Boolean disponivel;
+
 	private Livro livro;
 
 }
