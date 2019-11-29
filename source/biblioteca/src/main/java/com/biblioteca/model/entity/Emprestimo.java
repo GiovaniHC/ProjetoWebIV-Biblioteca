@@ -1,8 +1,7 @@
 package com.biblioteca.model.entity;
 
 import java.io.Serializable;
-import java.time.LocalTime;
-
+import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
@@ -27,11 +26,11 @@ public class Emprestimo extends AbstractEntity implements Serializable {
 	
 	private Usuario leitor;
 	
-	private LocalTime dataEmprestimo;
+	private LocalDateTime dataEmprestimo;
 	
-	private LocalTime dataPrevistaDevolucao;
+	private LocalDateTime dataPrevistaDevolucao;
 	
-	private LocalTime dataDevolucao;
+	private LocalDateTime dataDevolucao;
 	
 	@OneToOne(targetEntity = Reserva.class, fetch = FetchType.LAZY)
 	private Reserva reserva;
