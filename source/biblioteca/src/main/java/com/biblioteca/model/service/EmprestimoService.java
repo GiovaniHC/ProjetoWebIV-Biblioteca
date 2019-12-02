@@ -1,6 +1,7 @@
 package com.biblioteca.model.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -19,7 +20,7 @@ public class EmprestimoService {
 	@Autowired
 	private EmprestimoRepository emprestimoRepository;
 	
-	public Emprestimo relizarEmprestimo(Emprestimo emprestimo) {
+	public Emprestimo realizarEmprestimo(Emprestimo emprestimo) {
 		emprestimo.setDataEmprestimo(LocalDateTime.now());
 		emprestimo.setDataPrevistaDevolucao(LocalDateTime.now().plusDays(14));
 		return this.emprestimoRepository.save(emprestimo);
@@ -38,4 +39,13 @@ public class EmprestimoService {
 		emprestimo.setDataDevolucao(LocalDateTime.now());
 		return this.emprestimoRepository.save(emprestimo);
 	}
+	
+	public List<Emprestimo> listarEmprestimos() {
+		return this.emprestimoRepository.findAll();
+	}
+	
+	public Emprestimo detalharEmprestimo(long id) {
+		return this.emprestimoRepository.findById(id).orElse(null);
+	}
+	
 }

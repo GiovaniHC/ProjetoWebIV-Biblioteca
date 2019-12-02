@@ -1,5 +1,7 @@
 package com.biblioteca.model.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,18 @@ public class ExemplarService {
 
 	public Exemplar cadastrarExemplar(Exemplar exemplar) {
 		return this.exemplarRepository.save(exemplar);
+	}
+
+	public Exemplar detalharExemplar(long id) {
+		return this.exemplarRepository.findById(id).orElse(null);
+	}
+
+	public Exemplar atualizarExemplar(Exemplar exemplar) {
+		return this.exemplarRepository.save(exemplar);
+	}
+
+	public List<Exemplar> listarExemplares() {
+		return this.exemplarRepository.findAll();
 	}
 
 }

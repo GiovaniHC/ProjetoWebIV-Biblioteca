@@ -27,6 +27,18 @@ public class ReservaService {
 		cancelarReservaPorTempo();
 	}
 
+	public List<Reserva> listarReservas(){
+		return this.reservaRepository.findAll();
+	}
+	
+	public Reserva detalharReserva(long id) {
+		return this.reservaRepository.findById(id).orElse(null);
+	}
+	
+	public Reserva atualizarReserva(Reserva reserva) {
+		return this.reservaRepository.save(reserva);
+	}
+	
 	/**
 	 * preenche a List de exemplares de acordo com a quantidade de exemplares
 	 * reservados, e torna indisponiveis para nova reserva os exemplares que já

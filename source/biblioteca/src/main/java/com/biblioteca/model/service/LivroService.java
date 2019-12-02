@@ -4,6 +4,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.biblioteca.model.entity.Exemplar;
@@ -52,11 +54,14 @@ public class LivroService {
 	public List<Livro> listarLivros() {
 		return this.livroRepository.findAll();
 	}
+	
+	public Livro detalharLivro(long id) {
+		return this.livroRepository.findById(id).orElse(null);
+	}
 
-	/**
-	 * public Page<Livro> listarLivrosPorTitulo(String titulo, PageRequest
-	 * pageable){ return this.livroRepository.findByFilters(titulo, pageable); }
-	 **/
+	/**public Page<Livro> listarLivrosPorTitulo(String titulo, PageRequest pageable) {
+		return this.livroRepository.findByFilters(titulo, pageable);
+	}**/
 
 	/**
 	 * retorna a quantidade total de exemplares independente do status
