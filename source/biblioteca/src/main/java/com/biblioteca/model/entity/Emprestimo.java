@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,12 +28,20 @@ public class Emprestimo extends AbstractEntity implements Serializable {
 	
 	private Usuario leitor;
 	
+	@NotBlank
+	@NotNull
 	private LocalDateTime dataEmprestimo;
 	
+	@NotBlank
+	@NotNull
 	private LocalDateTime dataPrevistaDevolucao;
 	
+	@NotBlank
+	@NotNull
 	private LocalDateTime dataDevolucao;
 	
 	@OneToOne(targetEntity = Reserva.class, fetch = FetchType.LAZY)
 	private Reserva reserva;
+	
+	
 }

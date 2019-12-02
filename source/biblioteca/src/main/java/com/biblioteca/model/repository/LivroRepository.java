@@ -10,8 +10,7 @@ import com.biblioteca.model.entity.Livro;
 
 public interface LivroRepository extends JpaRepository<Livro, Long>{
 	
-	@Query("FROM Livro livro"
-			+ "WHERE (livro.titulo LIKE '%' || :titulo || '%' OR :titulo IS NULL")
-	public Page<Livro> findByTitulo(@Param("titulo")String titulo, Pageable pageable);
-
+	/**@Query("FROM Livro livro WHERE (livro.titulo LIKE '%' || :titulo || '%' OR :titulo IS NULL")
+	public Page<Livro> findByFilters(@Param("titulo") String titulo, Pageable pageable);**/
+	
 }

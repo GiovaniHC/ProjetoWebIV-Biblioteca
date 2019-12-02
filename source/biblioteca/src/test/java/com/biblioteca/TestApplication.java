@@ -1,4 +1,4 @@
-package com.projetobase;
+package com.biblioteca;
 
 import org.springframework.boot.test.context.TestConfiguration;
 

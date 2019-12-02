@@ -42,9 +42,13 @@ public class Livro extends AbstractEntity implements Serializable {
 	@Column(nullable = true, length = 13, unique = true)
 	private String isbn;
 
-	private Integer quantidade;
-
 	@OneToMany(targetEntity = Exemplar.class, fetch = FetchType.LAZY)
 	private List<Exemplar> exemplares = new ArrayList<Exemplar>();
+
+	/**
+	 * so servira para informar caso todos os exemplares sejam reservados/emprestados
+	 * ou seja alterado manualmente
+	 **/
+	private Boolean disponivel;
 
 }

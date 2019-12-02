@@ -1,4 +1,4 @@
-package com.projetobase.model.service;
+package com.biblioteca.model.service;
 
 import org.junit.Assert;
 import org.junit.Test;

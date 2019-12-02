@@ -14,16 +14,9 @@ public class ExemplarService {
 
 	@Autowired
 	private ExemplarRepository exemplarRepository;
-	
+
 	public Exemplar cadastrarExemplar(Exemplar exemplar) {
 		return this.exemplarRepository.save(exemplar);
 	}
-	
-	public void removerExemplar(long id) {
-		this.exemplarRepository.deleteById(id);
-	}
-	
-	/** verificar se é necessario um list para saber os exemplares;
-	 * ou algo para buscar os IDs
-	 */
+
 }

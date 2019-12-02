@@ -1,4 +1,6 @@
 
-TRUNCATE funcionario CASCADE;
-TRUNCATE departamento CASCADE;
+TRUNCATE livro CASCADE;
+TRUNCATE emprestimo CASCADE;
+TRUNCATE reserva CASCADE;
+TRUNCATE exemplar CASCADE;
 TRUNCATE usuario CASCADE;

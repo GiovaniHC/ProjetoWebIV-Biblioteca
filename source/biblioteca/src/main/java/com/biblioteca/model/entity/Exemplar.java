@@ -2,6 +2,10 @@ package com.biblioteca.model.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,8 +22,11 @@ import lombok.ToString;
 public class Exemplar extends AbstractEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private Boolean disponivel;
+	@NotNull
+	@Enumerated( EnumType.ORDINAL )
+	private ExemplarEnum status;
 
+	@NotNull
 	private Livro livro;
 
 }

@@ -1,4 +1,4 @@
-package com.projetobase.model.service;
+package com.biblioteca.model.service;
 
 import java.util.Locale;
 
@@ -9,7 +9,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.biblioteca.BibliotecaApplication;
-import com.projetobase.TestApplication;
+import com.biblioteca.TestApplication;
 
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
