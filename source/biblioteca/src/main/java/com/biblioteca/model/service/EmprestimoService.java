@@ -20,16 +20,19 @@ public class EmprestimoService {
 	@Autowired
 	private EmprestimoRepository emprestimoRepository;
 	
+	/**realizar um novo emprestimo**/
 	public Emprestimo realizarEmprestimo(Emprestimo emprestimo) {
 		emprestimo.setDataEmprestimo(LocalDateTime.now());
 		emprestimo.setDataPrevistaDevolucao(LocalDateTime.now().plusDays(14));
 		return this.emprestimoRepository.save(emprestimo);
 	}
 	
+	/**alterar um emprestimo**/
 	public Emprestimo atualizarEmprestimo(Emprestimo emprestimo) {
 		return this.emprestimoRepository.save(emprestimo);
 	}
 	
+	/**registrar a devolução do livro(exemplares)**/
 	public Emprestimo registrarDevolucao(Emprestimo emprestimo) {
 		for (Exemplar exemplar : emprestimo.getReserva().getLivro().getExemplares()) {
 			if (exemplar.getStatus() == ExemplarEnum.EMPRESTADO) {
@@ -40,10 +43,12 @@ public class EmprestimoService {
 		return this.emprestimoRepository.save(emprestimo);
 	}
 	
+	/**listagem de todos os emprestimos**/
 	public List<Emprestimo> listarEmprestimos() {
 		return this.emprestimoRepository.findAll();
 	}
 	
+	/**detalhamento de um emprestimo**/
 	public Emprestimo detalharEmprestimo(long id) {
 		return this.emprestimoRepository.findById(id).orElse(null);
 	}

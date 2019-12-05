@@ -28,15 +28,17 @@ public class LivroService {
 		alteraStatusLivro();
 	}
 
+	/**cadastrar um novo livro**/
 	public Livro cadastrarLivro(Livro livro) {
 		return this.livroRepository.save(livro);
 	}
 
+	/**alterar um livro**/
 	public Livro atualizarLivro(Livro livro) {
 		return this.livroRepository.save(livro);
 	}
 
-	/** o livro se torna indisponivel **/
+	/**tornar o livro indisponivel **/
 	public void indisponibilizarLivro(long id) {
 		Livro livro = this.livroRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Nenhum livro encontrado."));
@@ -44,6 +46,7 @@ public class LivroService {
 		this.livroRepository.save(livro);
 	}
 
+	/**tornar o livro disponivel **/
 	public void disponibilizarLivro(long id) {
 		Livro livro = this.livroRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Nenhum livro encontrado."));
@@ -51,21 +54,22 @@ public class LivroService {
 		this.livroRepository.save(livro);
 	}
 
+	/**listar todos os livros**/
 	public List<Livro> listarLivros() {
 		return this.livroRepository.findAll();
 	}
 	
+	/**detalhar um livro**/
 	public Livro detalharLivro(long id) {
 		return this.livroRepository.findById(id).orElse(null);
 	}
 
+	/**listar os livros com filtro por titulo de forma paginada, para se utilizar em um campo de pesquisa**/
 	/**public Page<Livro> listarLivrosPorTitulo(String titulo, PageRequest pageable) {
 		return this.livroRepository.findByFilters(titulo, pageable);
 	}**/
 
-	/**
-	 * retorna a quantidade total de exemplares independente do status
-	 **/
+	/**retorna a quantidade total de exemplares independente do status**/
 	public int quantidadeExemplar(Livro livro) {
 		int qtd = 0;
 		qtd = livro.getExemplares().size();
@@ -105,9 +109,8 @@ public class LivroService {
 		return qtd;
 	}
 
-	/**
-	 * altera o status do livro de acordo com a quantidade de exemplares disponiveis
-	 **/
+	/**altera o status do livro de acordo com a quantidade de exemplares disponiveis, 
+	 * feita de forma automatica toda vez que a classe é acessada, com o metodo init()**/
 	public void alteraStatusLivro() {
 		for (Livro l : this.livroRepository.findAll()) {
 			if (quantidadeExemplarDisponivel(l) > 0) {

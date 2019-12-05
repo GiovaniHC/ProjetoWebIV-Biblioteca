@@ -23,6 +23,7 @@ public class ReservaService {
 	private ReservaRepository reservaRepository;
 	private LivroRepository livroRepository;
 
+	/**toda vez que a classe é acessada**/
 	public void init() {
 		cancelarReservaPorTempo();
 	}
@@ -39,11 +40,8 @@ public class ReservaService {
 		return this.reservaRepository.save(reserva);
 	}
 	
-	/**
-	 * preenche a List de exemplares de acordo com a quantidade de exemplares
-	 * reservados, e torna indisponiveis para nova reserva os exemplares que já
-	 * foram reservados
-	 **/
+	/**altera a quantidade de exemplares reservados na lista de exemplares do livro, 
+	 * alterando o status para "RESERVADO", somente se o exemplar esteja com status "DISPONIVEL"**/
 	public Reserva novaReserva(Reserva reserva) {
 		List<Exemplar> exemplares = new ArrayList<Exemplar>();
 		for (int i = 0; reserva.getQuantidadeExemplar() > i; i++) {
@@ -60,10 +58,9 @@ public class ReservaService {
 		return this.reservaRepository.save(reserva);
 	}
 
-	/**
-	 * torna disponiveis para nova reserva os exemplares que já haviam sido
-	 * reservados e deleta a reserva
-	 **/
+	/**altera a quantidade de exemplares reservados na lista de exemplares do livro, 
+	 * alterando o status para "DISPONIVEL", somente se o exemplar esteja com status "RESERVADO" e a 
+	 * reserva é deletada**/
 	public void cancelarReserva(Reserva reserva) {
 		List<Exemplar> exemplares = new ArrayList<Exemplar>();
 		for (int i = 0; reserva.getQuantidadeExemplar() > i; i++) {

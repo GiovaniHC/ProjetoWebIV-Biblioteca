@@ -17,18 +17,22 @@ public class ExemplarService {
 	@Autowired
 	private ExemplarRepository exemplarRepository;
 
+	/**cadastrar um novo exemplar**/
 	public Exemplar cadastrarExemplar(Exemplar exemplar) {
 		return this.exemplarRepository.save(exemplar);
 	}
 
+	/**detalhar um exemplar**/
 	public Exemplar detalharExemplar(long id) {
 		return this.exemplarRepository.findById(id).orElse(null);
 	}
 
+	/**alterar um exemplar**/
 	public Exemplar atualizarExemplar(Exemplar exemplar) {
 		return this.exemplarRepository.save(exemplar);
 	}
 
+	/**listar todos os exemplares**/
 	public List<Exemplar> listarExemplares() {
 		return this.exemplarRepository.findAll();
 	}

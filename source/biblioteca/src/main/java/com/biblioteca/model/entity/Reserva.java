@@ -30,9 +30,6 @@ public class Reserva extends AbstractEntity implements Serializable {
 	@NotNull
 	private Livro livro;
 	
-	/**@OneToMany(targetEntity = Exemplar.class, fetch = FetchType.LAZY)
-	private List<Exemplar> exemplares = new ArrayList<Exemplar>();**/
-
 	@NotNull
 	private LocalDateTime dataReserva;
 

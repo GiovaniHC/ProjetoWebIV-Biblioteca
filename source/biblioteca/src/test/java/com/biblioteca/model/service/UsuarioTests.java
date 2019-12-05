@@ -57,7 +57,9 @@ public class UsuarioTests extends AbstractIntegrationTests
 	{
 		Usuario usuario = new Usuario();
 		usuario.setNome("Marcieli");
-		usuario.setEmail( "marcieli@mailinator.com" );
+		usuario.setCelular("045874552145");
+		usuario.setCpf("14785236987");
+		usuario.setEmail( "penek17962@topmail2.com" );
 		usuario.setPerfil( RoleEnum.ADMINISTRATOR );
 		this.usuarioService.cadastrarUsuario(usuario);
 		Assert.assertNotNull( usuario );
