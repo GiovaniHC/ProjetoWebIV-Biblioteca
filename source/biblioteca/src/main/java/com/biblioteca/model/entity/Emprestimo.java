@@ -29,19 +29,16 @@ public class Emprestimo extends AbstractEntity implements Serializable {
 	private Usuario leitor;
 	
 	@NotBlank
-	@NotNull
 	private LocalDateTime dataEmprestimo;
 	
 	@NotBlank
-	@NotNull
 	private LocalDateTime dataPrevistaDevolucao;
 	
-	@NotBlank
-	@NotNull
+	/**é nula enquanto não for realizado a devolução do livro**/
 	private LocalDateTime dataDevolucao;
 	
-	@OneToOne(targetEntity = Reserva.class, fetch = FetchType.LAZY)
+	/**cada reserva pode ou não se tornar um emprestimo**/
+	@OneToOne(targetEntity = Reserva.class, fetch = FetchType.LAZY, optional = true)
 	private Reserva reserva;
-	
 	
 }

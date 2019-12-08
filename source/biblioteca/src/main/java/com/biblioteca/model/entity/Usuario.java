@@ -1,7 +1,9 @@
 package com.biblioteca.model.entity;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -9,6 +11,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -48,7 +52,6 @@ public class Usuario extends AbstractEntity implements UserDetails {
 	@Size(max = 100)
 	private String email;
 	
-	
 	/**
 	 *
 	 */
@@ -58,17 +61,17 @@ public class Usuario extends AbstractEntity implements UserDetails {
 	@Size(max = 100)
 	private String senha;
 	
-	@Column(unique = true, nullable = false, length = 11)
 	@NotBlank
+	@Column(unique = true, nullable = false, length = 11)
 	private String cpf;
 	
 	@Column(nullable = true, length = 20, unique = true)
 	private String celular;
 	
+	@OneToMany(targetEntity = Reserva.class, fetch = FetchType.EAGER, mappedBy = "leitor")
+	private List<Reserva> reservas = new ArrayList<Reserva>();
 
-	/**
-	 * 
-	 */
+	
 	@Enumerated( EnumType.ORDINAL )
 	private RoleEnum perfil;
 

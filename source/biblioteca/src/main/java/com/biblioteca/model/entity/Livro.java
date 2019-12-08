@@ -42,7 +42,7 @@ public class Livro extends AbstractEntity implements Serializable {
 	@Column(nullable = true, length = 13, unique = true)
 	private String isbn;
 
-	@OneToMany(targetEntity = Exemplar.class, fetch = FetchType.LAZY)
+	@OneToMany(targetEntity = Exemplar.class, fetch = FetchType.EAGER, mappedBy = "livro")
 	private List<Exemplar> exemplares = new ArrayList<Exemplar>();
 
 	/**

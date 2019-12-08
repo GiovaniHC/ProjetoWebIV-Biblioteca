@@ -2,9 +2,13 @@ package com.biblioteca.model.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -33,8 +37,10 @@ public class Reserva extends AbstractEntity implements Serializable {
 	@NotNull
 	private LocalDateTime dataReserva;
 
-	@NotNull
-	@NotBlank
-	private Integer quantidadeExemplar;
+	/**@NotBlank
+	private Integer quantidadeExemplar;**/
+	
+	@OneToMany(targetEntity = Exemplar.class, fetch = FetchType.EAGER, mappedBy = "reserva")
+	private List<Exemplar> exemplares = new ArrayList<Exemplar>();
 
 }

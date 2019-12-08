@@ -4,6 +4,8 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -27,6 +29,10 @@ public class Exemplar extends AbstractEntity implements Serializable {
 	private ExemplarEnum status;
 
 	@NotNull
+	@ManyToOne(targetEntity = Livro.class, fetch = FetchType.LAZY, optional = false)
 	private Livro livro;
+	
+	@ManyToOne(targetEntity = Reserva.class, fetch = FetchType.LAZY, optional = false)
+	private Reserva reserva;
 
 }

@@ -44,14 +44,12 @@ public class ReservaService {
 	 * alterando o status para "RESERVADO", somente se o exemplar esteja com status "DISPONIVEL"**/
 	public Reserva novaReserva(Reserva reserva) {
 		List<Exemplar> exemplares = new ArrayList<Exemplar>();
-		for (int i = 0; reserva.getQuantidadeExemplar() > i; i++) {
-			for (Exemplar exemplar : reserva.getLivro().getExemplares()) {
+			for (Exemplar exemplar : reserva.getExemplares()) {
 				if (exemplar.getStatus() == ExemplarEnum.DISPONIVEL) {
 					exemplar.setStatus(ExemplarEnum.RESERVADO);
 					exemplares.add(exemplar);
 				}
 			}
-		}
 		Livro livro = this.livroRepository.findById(reserva.getLivro().getId()).orElse(null);
 		livro.setExemplares(exemplares);
 		this.livroRepository.save(livro);
@@ -63,14 +61,12 @@ public class ReservaService {
 	 * reserva é deletada**/
 	public void cancelarReserva(Reserva reserva) {
 		List<Exemplar> exemplares = new ArrayList<Exemplar>();
-		for (int i = 0; reserva.getQuantidadeExemplar() > i; i++) {
-			for (Exemplar exemplar : reserva.getLivro().getExemplares()) {
+			for (Exemplar exemplar : reserva.getExemplares()) {
 				if (exemplar.getStatus() == ExemplarEnum.RESERVADO) {
 					exemplar.setStatus(ExemplarEnum.DISPONIVEL);
 					exemplares.add(exemplar);
 				}
 			}
-		}
 		Livro livro = this.livroRepository.findById(reserva.getLivro().getId()).orElse(null);
 		livro.setExemplares(exemplares);
 		this.livroRepository.save(livro);
