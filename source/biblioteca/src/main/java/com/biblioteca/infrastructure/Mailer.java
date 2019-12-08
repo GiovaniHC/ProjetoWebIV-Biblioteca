@@ -99,7 +99,7 @@ public class Mailer
 		/**
 		 * Rodapé padrão para todos os e-mail
 		 */
-		context.setVariable( "systemName", "Minha Aplicação" );
+		context.setVariable( "systemName", "Biblioteca" );
 		context.setVariable( "currentYear", LocalDateTime.now().getYear() );
 	}
 

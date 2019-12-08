@@ -62,10 +62,10 @@ public class Usuario extends AbstractEntity implements UserDetails {
 	private String senha;
 	
 	@NotBlank
-	@Column(unique = true, nullable = false, length = 11)
+	@Column(nullable = false, length = 11)
 	private String cpf;
 	
-	@Column(nullable = true, length = 20, unique = true)
+	@Column(nullable = true, length = 20)
 	private String celular;
 	
 	@OneToMany(targetEntity = Reserva.class, fetch = FetchType.EAGER, mappedBy = "leitor")
