@@ -32,7 +32,7 @@ public class Exemplar extends AbstractEntity implements Serializable {
 	@ManyToOne(targetEntity = Livro.class, fetch = FetchType.LAZY, optional = false)
 	private Livro livro;
 	
-	@ManyToOne(targetEntity = Reserva.class, fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(targetEntity = Reserva.class, fetch = FetchType.LAZY, optional = true)
 	private Reserva reserva;
 
 }

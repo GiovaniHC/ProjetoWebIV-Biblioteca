@@ -65,24 +65,28 @@ public class LivroService {
 	}
 
 	/**listar os livros com filtro por titulo de forma paginada, para se utilizar em um campo de pesquisa**/
-	/**public Page<Livro> listarLivrosPorTitulo(String titulo, PageRequest pageable) {
+	public Page<Livro> listarLivrosPorTitulo(String titulo, PageRequest pageable) {
 		return this.livroRepository.findByFilters(titulo, pageable);
-	}**/
+	}
 
 	/**retorna a quantidade total de exemplares independente do status**/
 	public int quantidadeExemplar(Livro livro) {
 		int qtd = 0;
+		if(livro != null) {
 		qtd = livro.getExemplares().size();
+		}
 		return qtd;
 	}
 
 	/** retorna a quantidade de exemplares disponiveis **/
 	public int quantidadeExemplarDisponivel(Livro livro) {
 		int qtd = 0;
+		if(livro != null) {
 		for (Exemplar e : livro.getExemplares()) {
 			if (e.getStatus() == ExemplarEnum.DISPONIVEL) {
 				qtd++;
 			}
+		}
 		}
 		return qtd;
 	}
@@ -90,10 +94,12 @@ public class LivroService {
 	/** retorna a quantidade de exemplares emprestados **/
 	public int quantidadeExemplarEmprestado(Livro livro) {
 		int qtd = 0;
+		if(livro != null) {
 		for (Exemplar e : livro.getExemplares()) {
 			if (e.getStatus() == ExemplarEnum.EMPRESTADO) {
 				qtd++;
 			}
+		}
 		}
 		return qtd;
 	}
@@ -101,10 +107,12 @@ public class LivroService {
 	/** retorna a quantidade de exemplares reservados **/
 	public int quantidadeExemplarReservado(Livro livro) {
 		int qtd = 0;
+		if(livro != null) {
 		for (Exemplar e : livro.getExemplares()) {
 			if (e.getStatus() == ExemplarEnum.RESERVADO) {
 				qtd++;
 			}
+		}
 		}
 		return qtd;
 	}
