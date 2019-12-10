@@ -1,6 +1,6 @@
 INSERT INTO public.exemplar(
             id, created, status, livro_id)
-    VALUES (1001, NOW(), 0, 1001),
+    VALUES (1001, NOW(), 2, 1001),
            (1002, NOW(), 2, 1001),
            (1003, NOW(), 2, 1001),
            (1004, NOW(), 2, 1001),

@@ -1,5 +1,6 @@
 package com.biblioteca.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.transaction.Transactional;
 
@@ -28,17 +29,17 @@ public class LivroService {
 		alteraStatusLivro();
 	}
 
-	/**cadastrar um novo livro**/
+	/** cadastrar um novo livro **/
 	public Livro cadastrarLivro(Livro livro) {
 		return this.livroRepository.save(livro);
 	}
 
-	/**alterar um livro**/
+	/** alterar um livro **/
 	public Livro atualizarLivro(Livro livro) {
 		return this.livroRepository.save(livro);
 	}
 
-	/**tornar o livro indisponivel **/
+	/** tornar o livro indisponivel **/
 	public void indisponibilizarLivro(long id) {
 		Livro livro = this.livroRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Nenhum livro encontrado."));
@@ -46,7 +47,7 @@ public class LivroService {
 		this.livroRepository.save(livro);
 	}
 
-	/**tornar o livro disponivel **/
+	/** tornar o livro disponivel **/
 	public void disponibilizarLivro(long id) {
 		Livro livro = this.livroRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Nenhum livro encontrado."));
@@ -54,26 +55,29 @@ public class LivroService {
 		this.livroRepository.save(livro);
 	}
 
-	/**listar todos os livros**/
+	/** listar todos os livros **/
 	public List<Livro> listarLivros() {
 		return this.livroRepository.findAll();
 	}
-	
-	/**detalhar um livro**/
+
+	/** detalhar um livro **/
 	public Livro detalharLivro(long id) {
 		return this.livroRepository.findById(id).orElse(null);
 	}
 
-	/**listar os livros com filtro por titulo de forma paginada, para se utilizar em um campo de pesquisa**/
+	/**
+	 * listar os livros com filtro por titulo de forma paginada, para se utilizar em
+	 * um campo de pesquisa
+	 **/
 	public Page<Livro> listarLivrosPorTitulo(String titulo, PageRequest pageable) {
 		return this.livroRepository.findByFilters(titulo, pageable);
 	}
 
-	/**retorna a quantidade total de exemplares independente do status**/
+	/** retorna a quantidade total de exemplares independente do status **/
 	public int quantidadeExemplar(Livro livro) {
 		int qtd = 0;
-		if(livro != null) {
-		qtd = livro.getExemplares().size();
+		if (livro != null) {
+			qtd = livro.getExemplares().size();
 		}
 		return qtd;
 	}
@@ -81,44 +85,86 @@ public class LivroService {
 	/** retorna a quantidade de exemplares disponiveis **/
 	public int quantidadeExemplarDisponivel(Livro livro) {
 		int qtd = 0;
-		if(livro != null) {
-		for (Exemplar e : livro.getExemplares()) {
-			if (e.getStatus() == ExemplarEnum.DISPONIVEL) {
-				qtd++;
+		if (livro != null) {
+			for (Exemplar e : livro.getExemplares()) {
+				if (e.getStatus() == ExemplarEnum.DISPONIVEL) {
+					qtd++;
+				}
 			}
 		}
-		}
 		return qtd;
+	}
+
+	/** retorna a lista de exemplares disponiveis **/
+	public List<Exemplar> listaExemplaresDisponiveis(Livro livro) {
+		List<Exemplar> exemplares = new ArrayList<Exemplar>();
+		if (livro != null) {
+			for (Exemplar e : livro.getExemplares()) {
+				if (e.getStatus() == ExemplarEnum.DISPONIVEL) {
+					exemplares.add(e);
+				}
+			}
+		}
+		return exemplares;
 	}
 
 	/** retorna a quantidade de exemplares emprestados **/
 	public int quantidadeExemplarEmprestado(Livro livro) {
 		int qtd = 0;
-		if(livro != null) {
-		for (Exemplar e : livro.getExemplares()) {
-			if (e.getStatus() == ExemplarEnum.EMPRESTADO) {
-				qtd++;
+		if (livro != null) {
+			for (Exemplar e : livro.getExemplares()) {
+				if (e.getStatus() == ExemplarEnum.EMPRESTADO) {
+					qtd++;
+				}
 			}
 		}
-		}
 		return qtd;
+	}
+
+	/** retorna a lista de exemplares emprestados **/
+	public List<Exemplar> listaExemplaresEmprestados(Livro livro) {
+		List<Exemplar> exemplares = new ArrayList<Exemplar>();
+		if (livro != null) {
+			for (Exemplar e : livro.getExemplares()) {
+				if (e.getStatus() == ExemplarEnum.EMPRESTADO) {
+					exemplares.add(e);
+				}
+			}
+		}
+		return exemplares;
 	}
 
 	/** retorna a quantidade de exemplares reservados **/
 	public int quantidadeExemplarReservado(Livro livro) {
 		int qtd = 0;
-		if(livro != null) {
-		for (Exemplar e : livro.getExemplares()) {
-			if (e.getStatus() == ExemplarEnum.RESERVADO) {
-				qtd++;
+		if (livro != null) {
+			for (Exemplar e : livro.getExemplares()) {
+				if (e.getStatus() == ExemplarEnum.RESERVADO) {
+					qtd++;
+				}
 			}
-		}
 		}
 		return qtd;
 	}
 
-	/**altera o status do livro de acordo com a quantidade de exemplares disponiveis, 
-	 * feita de forma automatica toda vez que a classe é acessada, com o metodo init()**/
+	/** retorna a lista de exemplares reservados **/
+	public List<Exemplar> listaExemplaresReservados(Livro livro) {
+		List<Exemplar> exemplares = new ArrayList<Exemplar>();
+		if (livro != null) {
+			for (Exemplar e : livro.getExemplares()) {
+				if (e.getStatus() == ExemplarEnum.RESERVADO) {
+					exemplares.add(e);
+				}
+			}
+		}
+		return exemplares;
+	}
+
+	/**
+	 * altera o status do livro de acordo com a quantidade de exemplares
+	 * disponiveis, feita de forma automatica toda vez que a classe é acessada, com
+	 * o metodo init()
+	 **/
 	public void alteraStatusLivro() {
 		for (Livro l : this.livroRepository.findAll()) {
 			if (quantidadeExemplarDisponivel(l) > 0) {

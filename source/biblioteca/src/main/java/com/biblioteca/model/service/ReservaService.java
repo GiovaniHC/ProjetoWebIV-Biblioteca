@@ -50,7 +50,7 @@ public class ReservaService {
 					exemplares.add(exemplar);
 				}
 			}
-		Livro livro = this.livroRepository.findById(reserva.getLivro().getId()).orElse(null);
+		Livro livro = this.livroRepository.findById(reserva.getExemplares().get(0).getLivro().getId()).orElseThrow();
 		livro.setExemplares(exemplares);
 		this.livroRepository.save(livro);
 		return this.reservaRepository.save(reserva);
@@ -67,7 +67,7 @@ public class ReservaService {
 					exemplares.add(exemplar);
 				}
 			}
-		Livro livro = this.livroRepository.findById(reserva.getLivro().getId()).orElse(null);
+		Livro livro = this.livroRepository.findById(reserva.getExemplares().get(0).getLivro().getId()).orElse(null);
 		livro.setExemplares(exemplares);
 		this.livroRepository.save(livro);
 		this.reservaRepository.delete(reserva);

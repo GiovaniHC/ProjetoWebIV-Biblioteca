@@ -34,7 +34,7 @@ public class EmprestimoService {
 	
 	/**registrar a devolução do livro(exemplares)**/
 	public Emprestimo registrarDevolucao(Emprestimo emprestimo) {
-		for (Exemplar exemplar : emprestimo.getReserva().getLivro().getExemplares()) {
+		for (Exemplar exemplar : emprestimo.getReserva().getExemplares()) {
 			if (exemplar.getStatus() == ExemplarEnum.EMPRESTADO) {
 				exemplar.setStatus(ExemplarEnum.DISPONIVEL);
 			}

@@ -31,8 +31,8 @@ public class Reserva extends AbstractEntity implements Serializable {
 	@ManyToOne(targetEntity = Usuario.class, fetch = FetchType.LAZY, optional = false)
 	private Usuario leitor;
 
-	@NotNull
-	private Livro livro;
+	/**@NotNull
+	private Livro livro;**/
 	
 	@NotNull
 	private LocalDateTime dataReserva;
