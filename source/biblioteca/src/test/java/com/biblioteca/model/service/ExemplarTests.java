@@ -56,7 +56,7 @@ public class ExemplarTests extends AbstractIntegrationTests {
 	{
 		Exemplar exemplar = new Exemplar();
 		exemplar = exemplarService.detalharExemplar(1003);
-		exemplar.setStatus(ExemplarEnum.DISPONIVEL);
+		exemplar.setStatus(ExemplarEnum.RESERVADO);
 		exemplarService.atualizarExemplar(exemplar);
 		Assert.assertNotNull( exemplar );
 		Assert.assertNotNull(exemplar.getId());

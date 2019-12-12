@@ -28,19 +28,18 @@ import lombok.ToString;
 public class Reserva extends AbstractEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@NotNull
 	@ManyToOne(targetEntity = Usuario.class, fetch = FetchType.LAZY, optional = false)
 	private Usuario leitor;
 
-	/**@NotNull
-	private Livro livro;**/
+	@NotNull
+	@ManyToOne(targetEntity = Livro.class, fetch = FetchType.LAZY, optional = false)
+	private Livro livro;
 	
 	@NotNull
 	private LocalDateTime dataReserva;
 
-	/**@NotBlank
-	private Integer quantidadeExemplar;**/
+	@NotNull
+	private Integer quantidadeExemplar;
 	
-	@OneToMany(targetEntity = Exemplar.class, fetch = FetchType.EAGER, mappedBy = "reserva")
-	private List<Exemplar> exemplares = new ArrayList<Exemplar>();
-
 }

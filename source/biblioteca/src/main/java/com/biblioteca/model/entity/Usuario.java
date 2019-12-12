@@ -68,9 +68,15 @@ public class Usuario extends AbstractEntity implements UserDetails {
 	@Column(nullable = true, length = 20)
 	private String celular;
 	
-	@OneToMany(targetEntity = Reserva.class, fetch = FetchType.EAGER, mappedBy = "leitor")
+	/**lista de reservas para o leitor**/
+	@OneToMany(targetEntity = Reserva.class, fetch = FetchType.LAZY, mappedBy = "leitor")
 	private List<Reserva> reservas = new ArrayList<Reserva>();
 
+	/**lista de emprestimos realizados pelo bibliotecario**/
+	@OneToMany(targetEntity = Emprestimo.class, fetch = FetchType.LAZY, mappedBy = "bibliotecario")
+	private List<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
+	
+	
 	
 	@Enumerated( EnumType.ORDINAL )
 	private RoleEnum perfil;
