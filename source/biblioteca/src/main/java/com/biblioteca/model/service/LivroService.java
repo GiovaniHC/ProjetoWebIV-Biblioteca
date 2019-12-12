@@ -87,7 +87,7 @@ public class LivroService {
 		int qtd = 0;
 		if (livro != null) {
 			for (Exemplar e : livro.getExemplares()) {
-				if (e.getStatus() == ExemplarEnum.DISPONIVEL) {
+				if (e.getStatus().equals(ExemplarEnum.DISPONIVEL)) {
 					qtd++;
 				}
 			}
@@ -100,7 +100,7 @@ public class LivroService {
 		List<Exemplar> exemplares = new ArrayList<Exemplar>();
 		if (livro != null) {
 			for (Exemplar e : livro.getExemplares()) {
-				if (e.getStatus() == ExemplarEnum.DISPONIVEL) {
+				if (e.getStatus().equals(ExemplarEnum.DISPONIVEL)) {
 					exemplares.add(e);
 				}
 			}
@@ -113,7 +113,7 @@ public class LivroService {
 		int qtd = 0;
 		if (livro != null) {
 			for (Exemplar e : livro.getExemplares()) {
-				if (e.getStatus() == ExemplarEnum.EMPRESTADO) {
+				if (e.getStatus().equals(ExemplarEnum.EMPRESTADO)) {
 					qtd++;
 				}
 			}
@@ -126,7 +126,7 @@ public class LivroService {
 		List<Exemplar> exemplares = new ArrayList<Exemplar>();
 		if (livro != null) {
 			for (Exemplar e : livro.getExemplares()) {
-				if (e.getStatus() == ExemplarEnum.EMPRESTADO) {
+				if (e.getStatus().equals(ExemplarEnum.EMPRESTADO)) {
 					exemplares.add(e);
 				}
 			}
@@ -139,7 +139,7 @@ public class LivroService {
 		int qtd = 0;
 		if (livro != null) {
 			for (Exemplar e : livro.getExemplares()) {
-				if (e.getStatus() == ExemplarEnum.RESERVADO) {
+				if (e.getStatus().equals(ExemplarEnum.RESERVADO)) {
 					qtd++;
 				}
 			}
@@ -152,7 +152,7 @@ public class LivroService {
 		List<Exemplar> exemplares = new ArrayList<Exemplar>();
 		if (livro != null) {
 			for (Exemplar e : livro.getExemplares()) {
-				if (e.getStatus() == ExemplarEnum.RESERVADO) {
+				if (e.getStatus().equals(ExemplarEnum.RESERVADO)) {
 					exemplares.add(e);
 				}
 			}

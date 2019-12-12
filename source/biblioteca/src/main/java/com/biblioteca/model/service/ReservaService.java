@@ -1,6 +1,5 @@
 package com.biblioteca.model.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -8,11 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.biblioteca.model.entity.Exemplar;
-import com.biblioteca.model.entity.ExemplarEnum;
-import com.biblioteca.model.entity.Livro;
 import com.biblioteca.model.entity.Reserva;
-import com.biblioteca.model.repository.LivroRepository;
 import com.biblioteca.model.repository.ReservaRepository;
 
 @Service
@@ -21,7 +16,9 @@ public class ReservaService {
 
 	@Autowired
 	private ReservaRepository reservaRepository;
-	private LivroRepository livroRepository;
+	
+	@Autowired
+	private ExemplarService exemplarService;
 
 	/**toda vez que a classe é acessada**/
 	public void init() {
@@ -43,16 +40,7 @@ public class ReservaService {
 	/**altera a quantidade de exemplares reservados na lista de exemplares do livro, 
 	 * alterando o status para "RESERVADO", somente se o exemplar esteja com status "DISPONIVEL"**/
 	public Reserva novaReserva(Reserva reserva) {
-		List<Exemplar> exemplares = new ArrayList<Exemplar>();
-			for (Exemplar exemplar : reserva.getExemplares()) {
-				if (exemplar.getStatus() == ExemplarEnum.DISPONIVEL) {
-					exemplar.setStatus(ExemplarEnum.RESERVADO);
-					exemplares.add(exemplar);
-				}
-			}
-		Livro livro = this.livroRepository.findById(reserva.getExemplares().get(0).getLivro().getId()).orElseThrow();
-		livro.setExemplares(exemplares);
-		this.livroRepository.save(livro);
+		this.exemplarService.reservarExemplares(reserva.getLivro(), reserva.getQuantidadeExemplar());
 		return this.reservaRepository.save(reserva);
 	}
 
@@ -60,16 +48,7 @@ public class ReservaService {
 	 * alterando o status para "DISPONIVEL", somente se o exemplar esteja com status "RESERVADO" e a 
 	 * reserva é deletada**/
 	public void cancelarReserva(Reserva reserva) {
-		List<Exemplar> exemplares = new ArrayList<Exemplar>();
-			for (Exemplar exemplar : reserva.getExemplares()) {
-				if (exemplar.getStatus() == ExemplarEnum.RESERVADO) {
-					exemplar.setStatus(ExemplarEnum.DISPONIVEL);
-					exemplares.add(exemplar);
-				}
-			}
-		Livro livro = this.livroRepository.findById(reserva.getExemplares().get(0).getLivro().getId()).orElse(null);
-		livro.setExemplares(exemplares);
-		this.livroRepository.save(livro);
+		this.exemplarService.cancelarReservaExemplares(reserva.getLivro(), reserva.getQuantidadeExemplar());
 		this.reservaRepository.delete(reserva);
 	}
 

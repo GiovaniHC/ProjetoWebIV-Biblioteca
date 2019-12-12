@@ -58,21 +58,31 @@ public class LivroTests extends AbstractIntegrationTests {
 		Exemplar exem1 = new Exemplar();
 		exem1.setLivro(livro);
 		exem1.setStatus(ExemplarEnum.DISPONIVEL);
-		exem1.setCreated(LocalDateTime.now());
 		
 		livro.getExemplares().add(exem1);
 		
 		Exemplar exem2 = new Exemplar();
 		exem2.setLivro(livro);
 		exem2.setStatus(ExemplarEnum.DISPONIVEL);
-		exem2.setCreated(LocalDateTime.now());
 		
 		livro.getExemplares().add(exem2);
+		
+		Exemplar exem3 = new Exemplar();
+		exem3.setLivro(livro);
+		exem3.setStatus(ExemplarEnum.DISPONIVEL);
+		
+		livro.getExemplares().add(exem3);
+		
+		Exemplar exem4 = new Exemplar();
+		exem4.setLivro(livro);
+		exem4.setStatus(ExemplarEnum.DISPONIVEL);
+		
+		livro.getExemplares().add(exem4);
 		
 		livroService.cadastrarLivro(livro);
 		
 		Assert.assertNotNull( livro.getId() );
-		Assert.assertTrue(livro.getExemplares().size() == 2);
+		Assert.assertTrue(livro.getExemplares().size() == 4);
 
 		/**for(Exemplar exem : livro.getExemplares()) {
 			Assert.assertNotNull(exem.getId());
@@ -195,8 +205,8 @@ public class LivroTests extends AbstractIntegrationTests {
 		})
 	public void quantidadeExemplaresDoLivroReservadosMustPass()
 	{
-		int qtd = livroService.quantidadeExemplarReservado(livroService.detalharLivro(1001));
-		Assert.assertTrue( qtd == 1 );
+		int qtd = livroService.quantidadeExemplarReservado(livroService.detalharLivro(1002));
+		Assert.assertTrue( qtd == 2 );
 	}
 	
 	/**TESTES MUST FAIL**/

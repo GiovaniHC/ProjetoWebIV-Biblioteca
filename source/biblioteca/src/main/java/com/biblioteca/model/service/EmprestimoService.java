@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.biblioteca.model.entity.Emprestimo;
-import com.biblioteca.model.entity.Exemplar;
-import com.biblioteca.model.entity.ExemplarEnum;
 import com.biblioteca.model.repository.EmprestimoRepository;
 
 @Service
@@ -20,10 +18,14 @@ public class EmprestimoService {
 	@Autowired
 	private EmprestimoRepository emprestimoRepository;
 	
+	@Autowired
+	private ExemplarService exemplarService;
+	
 	/**realizar um novo emprestimo**/
 	public Emprestimo realizarEmprestimo(Emprestimo emprestimo) {
 		emprestimo.setDataEmprestimo(LocalDateTime.now());
 		emprestimo.setDataPrevistaDevolucao(LocalDateTime.now().plusDays(14));
+		this.exemplarService.emprestarExemplares(emprestimo.getReserva().getLivro(), emprestimo.getReserva().getQuantidadeExemplar());
 		return this.emprestimoRepository.save(emprestimo);
 	}
 	
@@ -34,11 +36,7 @@ public class EmprestimoService {
 	
 	/**registrar a devolução do livro(exemplares)**/
 	public Emprestimo registrarDevolucao(Emprestimo emprestimo) {
-		for (Exemplar exemplar : emprestimo.getReserva().getExemplares()) {
-			if (exemplar.getStatus() == ExemplarEnum.EMPRESTADO) {
-				exemplar.setStatus(ExemplarEnum.DISPONIVEL);
-			}
-		}
+		this.exemplarService.devolucaoExemplares(emprestimo.getReserva().getLivro(), emprestimo.getReserva().getQuantidadeExemplar());
 		emprestimo.setDataDevolucao(LocalDateTime.now());
 		return this.emprestimoRepository.save(emprestimo);
 	}

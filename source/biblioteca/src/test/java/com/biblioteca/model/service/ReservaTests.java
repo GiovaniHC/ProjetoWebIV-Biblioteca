@@ -26,6 +26,9 @@ public class ReservaTests extends AbstractIntegrationTests {
 	private LivroService livroService;
 	
 	@Autowired
+	private ExemplarService exemplarService;
+	
+	@Autowired
 	private ReservaRepository reservaRepository;
 	
 	@Autowired
@@ -43,25 +46,13 @@ public class ReservaTests extends AbstractIntegrationTests {
 	public void cadastrarNovaReservaLivroMustPass()
 	{
 		Reserva reserva = new Reserva();
-		Livro livro = new Livro();
-		livro = livroRepository.findById(1002L).orElse(null);
-		reserva.setCreated(LocalDateTime.now());
 		reserva.setDataReserva(LocalDateTime.now());
 		reserva.setLeitor(usuarioRepository.findById(1002L).orElse(null));
-		for(Exemplar exemplar : livroService.listaExemplaresDisponiveis(livro)) {
-			while(reserva.getExemplares().size() < 2) {
-				exemplar.setStatus(ExemplarEnum.RESERVADO);
-				reserva.getExemplares().add(exemplar);
-			}
-		}
-		reservaService.atualizarReserva(reserva);
+		reserva.setLivro(livroRepository.findById(1003L).orElse(null));
+		reserva.setQuantidadeExemplar(2);
+		this.reservaService.novaReserva(reserva);
 		Assert.assertNotNull( reserva );
 		Assert.assertNotNull(reserva.getId());
-		
-		for(Exemplar exemplar : reserva.getExemplares()) {
-			Assert.assertNotNull(exemplar.getId());
-			Assert.assertTrue(exemplar.getStatus() == ExemplarEnum.RESERVADO);
-		}
 
 	}
 }
